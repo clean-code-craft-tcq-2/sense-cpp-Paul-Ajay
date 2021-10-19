@@ -1,9 +1,13 @@
 #include "stats.h"
 
+void IAlerter::setAlert()
+{}
+
 void EmailAlert::setAlert()
 {
     this->emailSent = true;
 }
+
 void LEDAlert::setAlert()
 {
     this->ledGlows = true;
