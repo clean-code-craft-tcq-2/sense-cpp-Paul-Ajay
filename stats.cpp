@@ -1,5 +1,26 @@
 #include "stats.h"
 
+void EmailAlert::setAlert()
+{
+    this->emailSent = true;
+}
+void LEDAlert::setAlert()
+{
+    this->ledGlows = true;
+}
+
+StatsAlerter::StatsAlerter(const float maxThreshold, const std::vector<IAlerter*>& alert_vector)
+    : maxThreshold(maxThreshold),
+      alertVector(alert_vector)
+{}
+
+void StatsAlerter::checkAndAlert(const std::vector<float>& data) {
+    if (*(std::min_element(data.begin(), data.end())) > this->maxThreshold) {
+        this->alertVector.at(1)->setAlert();
+        this->alertVector.at(2)->setAlert();
+    }
+}
+
 Stats Statistics::ComputeStatistics(const std::vector<float>& data) {
     Stats data_stats;
     if (data.empty()) {
