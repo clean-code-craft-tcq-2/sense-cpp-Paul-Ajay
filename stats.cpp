@@ -20,8 +20,9 @@ StatsAlerter::StatsAlerter(const float maxThreshold, const std::vector<IAlerter*
 
 void StatsAlerter::checkAndAlert(const std::vector<float>& data) {
     if (*(std::min_element(data.begin(), data.end())) > this->maxThreshold) {
-        this->alertVector[0]->setAlert();
-        this->alertVector[1]->setAlert();
+        for (auto itr : this->alertVector) {
+            itr->setAlert();
+        }
     }
 }
 
